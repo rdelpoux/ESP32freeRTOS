@@ -87,11 +87,11 @@ const char* ssid     = "robotX";
 
 - [FreeRTOS](http://tvaira.free.fr/esp32/esp32-freertos.html)
 
-## Session 2 <a name="session2"></a>
+## Session 2a <a name="session2a"></a>
+The objective of this lab is to become familiar with the real-time multi-tasking mechanisms offered by FreeRTOS on an ESP32 microcontroller.
+- Instructions are given here :  [Real-time](Realtime.md)
 
-
-
-## Session 2 prime <a name="session2'"></a>
+## Session 2b <a name="session2b"></a>
 
 The objective of the lab is to implement a speed control so that the robot moves straight ahead. 
 
