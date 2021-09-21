@@ -1,4 +1,6 @@
-1. Introduction
+# Introduction to FreeRTOS
+
+## Introduction
 
 The objective of this lab is to become familiar with the real-time multi-tasking mechanisms offered by FreeRTOS on an ESP32 microcontroller.
 
@@ -8,8 +10,7 @@ https://moodle.insa-lyon.fr/mod/folder/view.php?id=157399
 The answers of the different questions will be added to the report of the lab session 1.
 
 
-
-2. Launching competing tasks
+## Launching competing tasks
 
 For the following sections, connect 2 probes of an oscilloscope to the pins of the board (see Figure below). Connect the ground to the outermost pin (0), connect channel 1 to the neighboring pin (gray probe) and channel 2 to the farthest pin (black probe).
 
@@ -17,22 +18,22 @@ For the following sections, connect 2 probes of an oscilloscope to the pins of t
 ![probes](https://user-images.githubusercontent.com/57991923/134173253-c9426799-a8c7-4cf9-9f38-db5377b86162.jpg)
 
 
-2.1 Two competing tasks
-  2.1.a First try
+1. Two competing tasks
+  - a First try
     
     Run the program: IF4_TP_S2_Q21a.ino
     
       1.	Describe briefly what is done by the program and the result obtained on the oscilloscope. Justify this result.
       2.	Open a serial monitor. What can you notice?
 
-  2.1.b Two tasks in competition (variant)
+  - Two tasks in competition (variant)
   
     Run the program: IF4_TP_S2_Q21b.ino
       1.	What is the difference with the previous program?
       2.	What is the impact on the operation on the oscilloscope and the serial monitor?
       3.	How can this problem be avoided?
 
-2.2 Periodic tasks
+2. Periodic tasks
   2.2.a First approach
     
     Run the program: IF4_TP_S2_Q22a.ino
