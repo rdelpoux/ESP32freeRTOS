@@ -31,7 +31,7 @@ The Lab is divided into 4 sessions of 4 hours.
 1. Getting to know the system and the control environment (4h)
 2. Real-time programmation (4h)
 3. Robot speed control and robot trajectory tracking (4h)
-4. àutomatic code generation
+4. Automatic code generation
 
 At the end of this project, students should be able to :
 
