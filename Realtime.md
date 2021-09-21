@@ -45,27 +45,36 @@ For the following sections, connect 2 probes of an oscilloscope to the pins of t
       4.	Gradually increase the varaiable nb_iterations in order to lengthen the working time of the 2 tasks. What happens?
       
 2.3 Synchronization between tasks
-      2.3.a Principles
-      A binary semaphore can be used to synchronize 2 tasks. MUTEX are useful to protect a common resource.
-      Another major difference between Mutexes and Binary Semaphores in FreeRTOS is the priority inheritance system. When multiple tasks request to take a Mutex, the priority of the Mutex holder is momentarily set to the highest priority value among the tasks waiting for its release. This technique has the effect of preventing the priority inversion phenomena seen during the first session, even if it does not guarantee infallible security against these phenomena.
-      
-      2.3.b Experiment 1
+  2.3.a Principles
+A binary semaphore can be used to synchronize 2 tasks. MUTEX are useful to protect a common resource. Another major difference between Mutex and Binary Semaphores in FreeRTOS is the priority inheritance system. When multiple tasks request to take a Mutex, the priority of the Mutex holder is momentarily set to the highest priority value among the tasks waiting for its release. This technique has the effect of preventing the priority inversion phenomena seen during the first lab session, even if it does not guarantee infallible security against these phenomena.
+        
+ 2.3.b Experiment 1 
       Run the program: IF4_TP_S2_Q23b.ino
-      1.	Explain what the program does and how it does it.
-      
-      2.3.c Experiment 2
+      1.	Explain what the program does and how it does it
+ 
+ 2.3.c Experiment 2
       Run the program: IF4_TP_S2_Q23c.ino
       1.	Explain what the program does (use the oscilloscope and a serial console).
       2.	What is not working correctly?
-      3.	Remove the comments from lines 56-57, 64-65, 91-92, 99-100. Explain what happens?
-      
-      2.3.d Interrupts
+      3.	Remove the comments from lines 56-57, 64-65, 91-92, 99-100. Explain what happens
+ 
+ 2.3.d Interrupts
       Run the program: IF4_TP_S2_Q23d.ino
       1.	Explain what the program does (use the oscilloscope and the serial console).
       2.	Modify the program so that it shows the movement of the left wheel on channel 1 and the right wheel on channel 2
+ 
+2.4 Communication between tasks
+      Run the program: IF4_TP_S2_Q24a.ino
+      1.	Explain what the program does (use the oscilloscope and a serial console).
+      2.	Take the example program #7 from the ESP32+FreeRTOS web page.
+      Run it, modify the task parameters and comment.
+
+2.5 Other possibilities if you still have spare time
+- Stop a task with vTaskDelete : see example n°5 of the ESP32+FreeRTOS web page  
+- Software timers Example n°9
 
 
-
+      
       
 
 
