@@ -32,7 +32,89 @@ The H-bridge is a PmodHB5 whose block block diagram is :
 
 The PmodHB5 utilizes a full H-Bridge circuit to allow users to drive DC motors from the system board. Two sensor feedback pins are incorporated into the motor connection header.
 
-#### PWM control code 
+#### Motor Control Pulse Width Modulator (MCPWM)
+
+For motor pins table, refer the the [system description page](/SystemDescription.md). 
+
+ESP32 has two MCPWM units which can be used to control different types of motors. Each unit has three pairs of PWM outputs.
+
+<img src="img/mcpwm-overview.png" alt="Dual-brige " width="600" />
+
+Configuration covers the following steps:
+
+1. Selection of a MCPWM unit that will be used to drive the motor.  There are two units available on-board of ESP32 and enumerated in [`mcpwm_unit_t`](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/mcpwm.html#_CPPv412mcpwm_unit_t).
+2. Initialization of two GPIOs as output signals within selected unit by calling [`mcpwm_gpio_init()`](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/mcpwm.html#_CPPv415mcpwm_gpio_init12mcpwm_unit_t18mcpwm_io_signals_ti). The two output signals are typically used to command the motor to  rotate right or left. All available signal options are listed in [`mcpwm_io_signals_t`](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/mcpwm.html#_CPPv418mcpwm_io_signals_t). To set more than a single pin at a time, use function [`mcpwm_set_pin()`](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/mcpwm.html#_CPPv413mcpwm_set_pin12mcpwm_unit_tPK18mcpwm_pin_config_t) together with [`mcpwm_pin_config_t`](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/mcpwm.html#_CPPv418mcpwm_pin_config_t).
+3. Selection of a timer. There are three timers available within the unit. The timers are listed in [`mcpwm_timer_t`](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/mcpwm.html#_CPPv413mcpwm_timer_t).
+4. Setting of the timer frequency and initial duty within [`mcpwm_config_t`](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/mcpwm.html#_CPPv414mcpwm_config_t) structure.
+5. Setting timer resolution if necessary, by calling [`mcpwm_group_set_resolution()`](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/mcpwm.html#_CPPv426mcpwm_group_set_resolution12mcpwm_unit_tm) and [`mcpwm_timer_set_resolution()`](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/mcpwm.html#_CPPv426mcpwm_timer_set_resolution12mcpwm_unit_t13mcpwm_timer_tm)
+6. Calling of [`mcpwm_init()`](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/mcpwm.html#_CPPv410mcpwm_init12mcpwm_unit_t13mcpwm_timer_tPK14mcpwm_config_t) with the above parameters to make the configuration effective.
+
+Code example :
+
+```c
+#include "driver/mcpwm.h"
+#include "soc/mcpwm_reg.h"
+#include "soc/mcpwm_struct.h"
+
+#define MOTOR_CTRL_MCPWM_UNIT   MCPWM_UNIT_0
+#define MOTOR_CTRL_MCPWM_TIMER  MCPWM_TIMER_0
+
+// MCPWM Pins
+#define GPIO_PWM0A_OUT XX   //Set GPIO XX as PWM0A
+#define GPIO_PWM0B_OUT XX   //Set GPIO XX as PWM0B
+
+void setup() {
+  Serial.println("initializing mcpwm control gpio...n");
+  mcpwm_gpio_init(MOTOR_CTRL_MCPWM_UNIT, MCPWM0A, GPIO_PWM0A_OUT);
+  mcpwm_gpio_init(MOTOR_CTRL_MCPWM_UNIT, MCPWM0B, GPIO_PWM0B_OUT);
+    
+  printf("Configuring Initial Parameters of mcpwm...\n");
+  mcpwm_config_t pwm_config;
+  pwm_config.frequency = 500;     //frequency = 500Hz,
+  pwm_config.cmpr_a = 0;                              //initial duty cycle of PWMxA = 0
+  pwm_config.cmpr_b = 0;                              //initial duty cycle of PWMxb = 0
+  pwm_config.counter_mode = MCPWM_UP_COUNTER;         //up counting mode
+  pwm_config.duty_mode = MCPWM_DUTY_MODE_0;
+  mcpwm_init(MOTOR_CTRL_MCPWM_UNIT, MOTOR_CTRL_MCPWM_TIMER, &pwm_config);    
+    //Configure PWM0A & PWM0B with above settings
+    
+  mcpwm_set_duty(MCPWM_UNIT_0, MCPWM_TIMER_0, MCPWM_OPR_A, 10);
+  mcpwm_set_duty(MCPWM_UNIT_0, MCPWM_TIMER_0, MCPWM_OPR_B, 20);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
+```
+
+- **Moving the DC motors forward or backwards**
+
+Declaring motor pins, for motor pins table, refer the the [system description page](/SystemDescription.md). First define the GPIOs the motor pine are connected to.
+
+```c
+#define MOTOR_A_DIR xx
+#define MOTOR_B_DIR xx
+
+```
+
+- Program **setup()** function
+
+In the **setup()**, first set the motor pins as outputs.
+
+```c
+pinMode(MOTOR_A_DIR, OUTPUT);
+pinMode(MOTOR_B_DIR, OUTPUT);
+
+```
+
+To move the motor forward, you set MOTOR_X_DIR pin to LOW, to move the motor backward, you set MOTOR_X_DIR pin to HIGH.
+
+```c
+digitalWrite(MOTOR_X_DIR, LOW);
+```
+
+####   Less elegant alternative solution
 
 The [LED control (LEDC)](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html) peripheral is primarily designed to control the  intensity of LEDs, although it can also be used to generate PWM signals  for other purposes. It has 16 channels which can generate independent waveforms that can be  used.
 
@@ -43,10 +125,10 @@ The following steps detail how to control the DC motor using PWM on ESP32.
 For motor pins table, refer the the [system description page](/SystemDescription.md). First define the GPIOs the motor pine are connected to.
 
 ```c
-int motor1Enable = 32;
-int motor1Dir = 16;
-int motor2Enable = 33;
-int motor2Dir = 17;    
+int motor1Enable = XX;
+int motor1Dir = XX;
+int motor2Enable = XX;
+int motor2Dir = XX;    
 ```
 
 - Program **setup()** function
