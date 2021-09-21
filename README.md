@@ -89,6 +89,10 @@ const char* ssid     = "robotX";
 
 ## Session 2 <a name="session2"></a>
 
+
+
+## Session 2 prime <a name="session2'"></a>
+
 The objective of the lab is to implement a speed control so that the robot moves straight ahead. 
 
 - Instructions are given here : [Closed Loop Control](Closedloopcontrol.md)
