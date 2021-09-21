@@ -13,6 +13,7 @@ Given the specifications, our choice is directed to an ESP32 controller. This lo
 - [Session 1](#session1)
 - [Session 2](#session2)
 - [Session 3](#session3)
+- [Session 4](#session4)
 - [Sources](#sources)
 - [License](#license)
 
@@ -25,11 +26,12 @@ Given the specifications, our choice is directed to an ESP32 controller. This lo
 
 ## Lab objective <a name="objective"></a>
 
-The Lab is divided into 3 sessions of 4 hours. 
+The Lab is divided into 4 sessions of 4 hours. 
 
 1. Getting to know the system and the control environment (4h)
-2. Robot speed control (4h)
-3. Robot trajectory tracking (4h)
+2. Real-time programmation (4h)
+3. Robot speed control and robot trajectory tracking (4h)
+4. àutomatic code generation
 
 At the end of this project, students should be able to :
 
@@ -87,17 +89,17 @@ const char* ssid     = "robotX";
 
 - [FreeRTOS](http://tvaira.free.fr/esp32/esp32-freertos.html)
 
-## Session 2a <a name="session2a"></a>
+## Session 2 <a name="session2"></a>
 The objective of this lab is to become familiar with the real-time multi-tasking mechanisms offered by FreeRTOS on an ESP32 microcontroller.
 - Instructions are given here :  [Real-time](Realtime.md)
 
-## Session 2b <a name="session2b"></a>
+## Session 3 <a name="session3"></a>
 
 The objective of the lab is to implement a speed control so that the robot moves straight ahead. 
 
 - Instructions are given here : [Closed Loop Control](Closedloopcontrol.md)
 
-## Session 3 <a name="session3"></a>
+## Session 4 <a name="session2"></a>
 
 To implement different control laws on the robot we propose here a solution for automatic code generation :
 
