@@ -50,9 +50,12 @@ For the following sections, connect 2 probes of an oscilloscope to the pins of t
       4.	Gradually increase the varaiable nb_iterations in order to lengthen the working time of the 2 tasks. What happens?
       
 2.3 Synchronization between tasks
+
   2.3.a Principles
+
 A binary semaphore can be used to synchronize 2 tasks. MUTEX are useful to protect a common resource. Another major difference between Mutex and Binary Semaphores in FreeRTOS is the priority inheritance system. When multiple tasks request to take a Mutex, the priority of the Mutex holder is momentarily set to the highest priority value among the tasks waiting for its release. This technique has the effect of preventing the priority inversion phenomena seen during the first lab session, even if it does not guarantee infallible security against these phenomena.
-        
+
+
  2.3.b Experiment 1 
     
     Run the program: IF4_TP_S2_Q23b.ino
