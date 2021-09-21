@@ -79,6 +79,9 @@ A binary semaphore can be used to synchronize 2 tasks. MUTEX are useful to prote
     Run the program: IF4_TP_S2_Q24a.ino
       1.	Explain what the program does (use the oscilloscope and a serial console).
       2.	Take the example program #7 from the ESP32+FreeRTOS web page.
+      
+      http://tvaira.free.fr/esp32/esp32-freertos.html#communication-entre-t%C3%A2ches
+      
       Run it, modify the task parameters and comment.
 
 2.5 Other possibilities if you still have spare time
