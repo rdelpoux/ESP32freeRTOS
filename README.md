@@ -1,10 +1,8 @@
-# Lab : Mobile Robot ESP32
+# Lab : FreeRTOS - Mobile Robot ESP32
 
 <img src="https://raw.githubusercontent.com/rdelpoux/ESP32Robot/main/img/MobileRobile.jpg" alt="Dual-brige " width="400" />
 
-This repository is dedicated to the development of a new mobile robot Lab proposed for student in the French engineering school [INSA Lyon](www.insa-lyon.fr). In a COVID context the objective is to propose automatic control lab which can be taught both in class and remotely in the event of confinement. The constraint is to be able to illustrate the basic automatic control principles on a simple system, without the need for software requiring a significant computing capacity.  During the lab, Matlab/Simulink:registered:  can be used to do the corrector synthesis, but the students can access it remotely using a VPN.
-
-Given the specifications, our choice is directed to an ESP32 controller. This low cost device combines a dual core 160Mhz CPU and Wi-Fi. This makes it possible to embed a web server and that the students can realize the entire Lab using only an Internet browser.  
+This repository is dedicated to Practical Work supports intended for students of the Multi-Task and Real Time course proposed to 5th year student in the electrical engineering department at  [INSA Lyon](www.insa-lyon.fr). 
 
 ## Content
 
@@ -19,14 +17,14 @@ Given the specifications, our choice is directed to an ESP32 controller. This lo
 
 ## Contributors <a name="contributors"></a>
 
-- Romain Delpoux (Romain.Delpoux at insa-lyon.fr), Associate Professor, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
-- Aboubacar Ndoye (Aboubacar.Ndoye at insa-lyon.fr), PhD student, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
-- Cédric Escudero (Cedric.Escudero at insa-lyon.fr), Assistant Professor, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
+- Romain Delpoux (romain.delpoux at insa-lyon.fr), Associate Professor, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
+- Arnaud Lelevé (arnaud.leleve at  insa-lyon.fr), Associate Professor, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
+- Minh Tu Pham (minh-tu.pham at insa-lyon.fr), Assistant Professor, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
 - Pascal Bevilacqua (pascal.bevilacqua at insa-lyon.fr), Engineer, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
 
 ## Lab objective <a name="objective"></a>
 
-The Lab is divided into 4 sessions of 4 hours. 
+The Lab is divided into 3 sessions of 4 hours and a bonus
 
 1. Getting to know the system and the control environment (4h)
 2. Real-time programmation (4h)
@@ -49,9 +47,9 @@ The objective of this first session is to discover the system. At the end of the
 
 - Learned about the Arduino programming environment for ESP32.
 - Run both motors (forward, backward).
-- Use encoders.
+- Used encoders.
 - Understand the open-loop behavior of the Robot
-- Wi-Fi server
+- Used Wi-Fi server
 
 ### System description
 
