@@ -19,7 +19,7 @@ This repository is dedicated to Practical Work supports intended for students of
 
 - Romain Delpoux (romain.delpoux at insa-lyon.fr), Associate Professor, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
 - Arnaud Lelevé (arnaud.leleve at  insa-lyon.fr), Associate Professor, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
-- Minh Tu Pham (minh-tu.pham at insa-lyon.fr), Assistant Professor, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
+- Minh Tu Pham (minh-tu.pham at insa-lyon.fr), Associate Professor, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
 - Pascal Bevilacqua (pascal.bevilacqua at insa-lyon.fr), Engineer, INSA de Lyon, Laboratoire Ampère UMR CNRS 5005.
 
 ## Lab objective <a name="objective"></a>
