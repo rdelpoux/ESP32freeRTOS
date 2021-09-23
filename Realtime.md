@@ -23,8 +23,8 @@ For the following sections, connect 2 probes of an oscilloscope to the pins of t
 
       Run the program: IF4_TP_S2_Q21a.ino
 
-          1.	Describe briefly what is done by the program and the result obtained on the oscilloscope. Justify this result.
-          2.	Open a serial monitor. What can you notice?
+         1.	Describe briefly what is done by the program and the result obtained on the oscilloscope. Justify this result.
+         2.	Open a serial monitor. What can you notice?
 
    2. Two tasks in competition (variant)
 
