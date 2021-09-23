@@ -215,9 +215,9 @@ for( i = 0; i<iterationsNb; i++ ) {
 
 4. Interrupts
 
-       1. Download and Run the program: [Interrupts.ino](/Programmes/FreeRTOSExercises/Interrupts) 
-       2. Explain what the program does (use the oscilloscope and the serial monitor).
-       3. Modify the program so that it shows the movement of the left wheel on channel 1 and the right wheel on channel 2.
+   1. Download and Run the program: [Interrupts.ino](/Programmes/FreeRTOSExercises/Interrupts) 
+   2. Explain what the program does (use the oscilloscope and the serial monitor).
+   3. Modify the program so that it shows the movement of the left wheel on channel 1 and the right wheel on channel 2.
 
 ## 3. Communication between tasks
 
