@@ -169,67 +169,71 @@ for( i = 0; i<iterationsNb; i++ ) {
 
 4. Periodic tasks
 
-   - 
+   - Add a delay after the simulated work of each task using the function :
 
-1. Periodic tasks
+     ```c
+     vTaskDelay( pdMS_TO_TICKS( task1_period ) );    
+     ```
 
-   1. First approach
-      Run the program: IF4_TP_S2_Q22a.ino
+   - What periods do we get for tasks 1 and 2? Explain.
 
-      1. What are the differences with the previous program?
-      2. What periods do we get for tasks 1 and 2? Explain
-      3. What happens if we force the 2 tasks to run on the same core?
-      4. Is this a good approach?
+   - What happens if we force the 2 tasks to run on the same core?
 
-   2. Second approach
+   - Is this a good approach?
 
-      Run the program: IF4_TP_S2_Q22b.ino
-          1.	What are the differences with the previous program?
-          2.	What periods do we get for tasks 1 and 2? Explain why.
-          3.	What happens if we force the 2 tasks to run on the same core?
-          4.	Gradually increase the varaiable nb_iterations in order to lengthen the working time of the 2 tasks. What happens?
-      
-      ## Synchronization between tasks
+5. Periodic tasks
 
-   1. Principles
+   - Use now the function 
 
-      A binary semaphore can be used to synchronize 2 tasks. MUTEX are useful to protect a common resource. Another major difference between Mutex and Binary Semaphores in FreeRTOS is the priority inheritance system. When multiple tasks request to take a Mutex, the priority of the Mutex holder is momentarily set to the highest priority value among the tasks waiting for its release. This technique has the effect of preventing the priority inversion phenomena seen during the first lab session, even if it does not guarantee infallible security against these phenomena.
+      ```c
+      vTaskDelayUntil( &xLastWakeTime, pdMS_TO_TICKS( task1_period ) );
+      ```
 
-   2. Experiment 1 
+     - What periods do we get for tasks 1 and 2? Explain why.
+     - What happens if we force the 2 tasks to run on the same core?
+     - Gradually increase the varaiable nb_iterations in order to lengthen the working time of the 2 tasks. What happens?
 
-      Download and Run the program: [Synchro1.ino](/Programmes/FreeRTOSExercises/Synchro1)
+## 2. Synchronization between tasks
 
-      Explain what the program does and how it does it
+1. Principles
 
-   3. Experiment 2
+   A binary semaphore can be used to synchronize 2 tasks. MUTEX are useful to protect a common resource. Another major difference between Mutex and Binary Semaphores in FreeRTOS is the priority inheritance system. When multiple tasks request to take a Mutex, the priority of the Mutex holder is momentarily set to the highest priority value among the tasks waiting for its release. This technique has the effect of preventing the priority inversion phenomena seen during the first lab session, even if it does not guarantee infallible security against these phenomena.
 
-      Run the program: IF4_TP_S2_Q23c.ino
+2. Experiment 1 
 
-      1. Explain what the program does (use the oscilloscope and a serial console).
-      2. What is not working correctly?
-      3. Remove the comments from lines 56-57, 64-65, 91-92, 99-100. Explain what happens
+   Download and Run the program: [Synchro1.ino](/Programmes/FreeRTOSExercises/Synchro1)
 
-   4. Interrupts
+   Explain what the program does and how it does it. 
 
-      Run the program: IF4_TP_S2_Q23d.ino
+3. Experiment 2
 
-        1. Explain what the program does (use the oscilloscope and the serial console).
-        2. Modify the program so that it shows the movement of the left wheel on channel 1 and the right wheel on channel 2.
+   Download and Run the program: [Synchro2.ino](/Programmes/FreeRTOSExercises/Synchro2)
 
-  2. Communication between tasks
+   1. Explain what the program does (use the oscilloscope and a serial console).
+   2. What is not working correctly?
+   3. Remove the comments from lines 56-57, 64-65, 91-92, 99-100. Explain what happens
 
-     Run the program: IF4_TP_S2_Q24a.ino
-       1.	Explain what the program does (use the oscilloscope and a serial console).
-       2. Take the example program #7 from the ESP32+FreeRTOS web page.
+4. Interrupts
 
-            http://tvaira.free.fr/esp32/esp32-freertos.html#communication-entre-t%C3%A2ches
+       1. Download and Run the program: [Interrupts.ino](/Programmes/FreeRTOSExercises/Interrupts) 
+       2. Explain what the program does (use the oscilloscope and the serial monitor).
+       3. Modify the program so that it shows the movement of the left wheel on channel 1 and the right wheel on channel 2.
 
-            Run it, modify the task parameters and comment.
+## 3. Communication between tasks
 
-3. Other possibilities if you still have spare time
 
-   1. Stop a task with vTaskDelete : see example n°5 of the ESP32+FreeRTOS web page  
-   2. Software timers Example n°9
+
+Download and Run the program: [TasksCommunication.ino](/Programmes/FreeRTOSExercises/TasksCommunication) 
+  1. Explain what the program does (use the oscilloscope and a serial console).
+
+  2. Take the example program #7 from the [ESP32+FreeRTOS](http://tvaira.free.fr/esp32/esp32-freertos.html#communication-entre-t%C3%A2ches) web page.
+
+       Run it, modify the task parameters and comment.
+
+## 4. Other possibilities if you still have spare time
+
+1. Stop a task with vTaskDelete : see example n°5 of the [ESP32+FreeRTOS](http://tvaira.free.fr/esp32/esp32-freertos.html#communication-entre-t%C3%A2ches) web page  
+2. Software timers Example n°9
 
 # Final rendering
 
@@ -240,3 +244,4 @@ Remember to upload your PDF report to moodle
 # Sources
 
 - [ESP32 + FreeRTOS](http://tvaira.free.fr/esp32/esp32-freertos.html)
+- [FreeRTOS](https://www.freertos.org/RTOS.html)
