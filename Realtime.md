@@ -203,30 +203,30 @@ for( i = 0; i<iterationsNb; i++ ) {
 
    Download and Run the program: [Synchro1.ino](/Programmes/FreeRTOSExercises/Synchro1)
 
-   Explain what the program does and how it does it. 
+   - Explain what the program does and how it does it. 
 
 3. Experiment 2
 
    Download and Run the program: [Synchro2.ino](/Programmes/FreeRTOSExercises/Synchro2)
 
-   1. Explain what the program does (use the oscilloscope and a serial console).
-   2. What is not working correctly?
-   3. Remove the comments from lines 56-57, 64-65, 91-92, 99-100. Explain what happens
+   - Explain what the program does (use the oscilloscope and a serial console).
+   - What is not working correctly?
+   - Remove the comments from lines 56-57, 64-65, 91-92, 99-100. Explain what happens
 
 4. Interrupts
 
-   1. Download and Run the program: [Interrupts.ino](/Programmes/FreeRTOSExercises/Interrupts) 
-   2. Explain what the program does (use the oscilloscope and the serial monitor).
-   3. Modify the program so that it shows the movement of the left wheel on channel 1 and the right wheel on channel 2.
+     - Download and Run the program: [Interrupts.ino](/Programmes/FreeRTOSExercises/Interrupts) 
+     - Explain what the program does (use the oscilloscope and the serial monitor).
+     - Modify the program so that it shows the movement of the left wheel on channel 1 and the right wheel on channel 2.
 
 ## 3. Communication between tasks
 
 
 
 Download and Run the program: [TasksCommunication.ino](/Programmes/FreeRTOSExercises/TasksCommunication) 
-  1. Explain what the program does (use the oscilloscope and a serial console).
+  - Explain what the program does (use the oscilloscope and a serial console).
 
-  2. Take the example program #7 from the [ESP32+FreeRTOS](http://tvaira.free.fr/esp32/esp32-freertos.html#communication-entre-t%C3%A2ches) web page.
+  - Take the example program #7 from the [ESP32+FreeRTOS](http://tvaira.free.fr/esp32/esp32-freertos.html#communication-entre-t%C3%A2ches) web page.
 
        Run it, modify the task parameters and comment.
 
