@@ -197,7 +197,7 @@ for( i = 0; i<iterationsNb; i++ ) {
 
    2. Experiment 1 
 
-      Download and Run the program: [Synchro1.ino](/Programmes/FreeRTOSExercises/Synchro1/Synchro1.ino)
+      Download and Run the program: [Synchro1.ino](/Programmes/FreeRTOSExercises/Synchro1)
 
       Explain what the program does and how it does it
 
