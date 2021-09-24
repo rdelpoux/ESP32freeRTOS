@@ -57,7 +57,7 @@ void vTaskCode( void * pvParameters )
 }
 ```
 
-Create task 
+Create task:
 
 ```c
 xTaskCreate(
@@ -69,10 +69,10 @@ xTaskCreate(
     NULL); /* Task handle to keep track of created task */
 ```
 
-Create task
+Create task executed on defined core:
 
 ```c
-xTaskCreate(
+xTaskCreatePinnedToCore(
     vATaskFunction, /* Task function. */
     "vATaskFunction", /* name of task. */
     10000, /* Stack size of task */
@@ -81,8 +81,6 @@ xTaskCreate(
     NULL,/* Task handle to keep track of created task */
 	xCoreID);/*Specify the core*/ 
 ```
-
-Create task
 
 ### vTaskDelay
 
