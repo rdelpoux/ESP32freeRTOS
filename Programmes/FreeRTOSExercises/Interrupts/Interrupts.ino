@@ -1,10 +1,14 @@
-// Programme IF4_TP_S2_Q21b
+// Programme IF4_TP_S2_Q21d
 
-// périodes des tâches en ms
-//int task1_period = 10;
-//int task2_period = 20;
+// Encoder
+int S1A = 25;
+int S1B = 27;
+int S2A = 26;
+int S2B = 14;
 
-int nb_iterations = 100;
+// param oscillations
+int nb_iterations = 10;
+int half_period_ms = 5;
 
 // pins sondées à l'oscillo
 // mettre la masse sur la pin la broche la + externe, voie 1 (tâche 1) sur la broche voisine et voie 2 sur la broche la + éloignée
@@ -12,16 +16,27 @@ uint8_t oscillo1     = 19;
 uint8_t oscillo2     = 5;
 
 // priorité des tâches 1 et 2
-int task1_prio = 10;
+int task1_prio = 20;
 int task2_prio = 10;
 
-int half_period_ms = 10;
 
 // variables globales représentant les tâches 1 et 2
 TaskHandle_t Task1, Task2;
 
-// Variable globale pour accéder à un sémaphore binaire
-SemaphoreHandle_t xMutex = NULL;
+// Interruption Prototypes;
+void IRAM_ATTR interruptWheel1();
+
+SemaphoreHandle_t xBinarySemaphore = NULL;
+
+void IRAM_ATTR interruptWheel2()
+{
+  BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+  Serial.println("interruptWheel2()");
+  xSemaphoreGiveFromISR( xBinarySemaphore, &xHigherPriorityTaskWoken );
+  if( xHigherPriorityTaskWoken != pdFALSE )
+    portYIELD_FROM_ISR();
+}
 
 
 /**
@@ -46,26 +61,16 @@ void alternate(uint8_t output, int half_period_ms) {
  */
 void vTask1( void *pvParameters )
 {
+  TickType_t xLastWakeTime;
+  
   Serial.printf("vTask1 / core %d started\n", xPortGetCoreID());
 
   for (;;) {
-    // simule du boulot
-    Serial.printf("vTask1 travaille de son côté\n", xPortGetCoreID());
-    delay(nb_iterations*half_period_ms);
+    xLastWakeTime = xTaskGetTickCount();
     
-    //xSemaphoreTake(xMutex, portMAX_DELAY);
-    //Serial.printf("vTask1 a verrouillé le mutex\n", xPortGetCoreID());
-
-    // simule du boulot du voie 1
-    Serial.printf("vTask1 travaille sur la ressource partagée\n", xPortGetCoreID());
-    alternate(oscillo1, 10);
-    Serial.printf("vTask1 a fini de travailler sur la ressource partagée\n", xPortGetCoreID());
-    
-    //Serial.printf("vTask1 déverrouille le mutex\n", xPortGetCoreID());    
-    //xSemaphoreGive(xMutex);
-    
-
-    vTaskDelay( pdMS_TO_TICKS( 100 ) );   
+    // simule du boulot périodique   
+    alternate(oscillo1, half_period_ms);    
+    vTaskDelayUntil( &xLastWakeTime, pdMS_TO_TICKS( 100 ) );
   }   
 
   // si la tâche devait se terminer d'elle même, alors finir avec:
@@ -84,23 +89,30 @@ void vTask2( void *pvParameters )
   // boucle infinie
   for (;;) {
     
-    // simule du boulot
-    Serial.printf("vTask2 travaille de son côté\n", xPortGetCoreID());
+    // attend l'interruption
+    xSemaphoreTake( xBinarySemaphore, portMAX_DELAY );
+    Serial.printf("vTask2 called\n");
+    
+    // simule du boulot     
+    alternate(oscillo2, half_period_ms); 
+    
+    
+  /*  Serial.printf("vTask2 travaille de son côté\n", xPortGetCoreID());
     delay(10);
     
-    //xSemaphoreTake(xMutex, portMAX_DELAY);
-    //Serial.printf("vTask2 a verrouillé le mutex\n", xPortGetCoreID());
+    xSemaphoreTake(xMutex, portMAX_DELAY);
+    Serial.printf("vTask2 a verrouillé le mutex\n", xPortGetCoreID());
 
     // simule du boulot
     Serial.printf("vTask2 travaille sur la ressource partagée\n", xPortGetCoreID());
     alternate(oscillo2, 10);
     Serial.printf("vTask2 a fini de travailler sur la ressource partagée\n", xPortGetCoreID());
     
-    //Serial.printf("vTask2 déverrouille le mutex\n", xPortGetCoreID());
-    //xSemaphoreGive(xMutex);
+    Serial.printf("vTask2 déverrouille le mutex\n", xPortGetCoreID());
+    xSemaphoreGive(xMutex);
  
-    
-    vTaskDelay( pdMS_TO_TICKS( 200 ) );     
+    */
+    vTaskDelay( pdMS_TO_TICKS( 10 ) );     
   }   
 
   // si la tâche devait se terminer d'elle même, alors finir avec:
@@ -121,9 +133,12 @@ void setup()
   // declare 2 sorties TOR, celles accessibles à côté de la prise USB
   pinMode(oscillo1, OUTPUT);
   pinMode(oscillo2, OUTPUT);
+  digitalWrite(oscillo2, LOW); 
 
-  //création d'un sémaphore binaire
-  xMutex = xSemaphoreCreateMutex();
+  xBinarySemaphore = xSemaphoreCreateBinary();
+  
+  pinMode(S2A , INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(S2A), interruptWheel2, CHANGE);
  
   
   /* créé 1 tâche en forçant l'allocation au noyau 0 
