@@ -16,7 +16,7 @@ At the end of this session you should be familiar with the following concepts:
 
 This sessions is evaluated you must file a report on moodle at the end of the session (Answer to questions and oscilloscope screenshots are provided only. No code should appear in the report):
 
-[Rendu TP 2](https://moodle.insa-lyon.fr/course/view.php?id=72#section-6)
+[Rendu TP 2](https://moodle.insa-lyon.fr/course/view.php?id=72#section-5)
 
 The answers of the different questions will be added to the report of the lab session 1.
 
