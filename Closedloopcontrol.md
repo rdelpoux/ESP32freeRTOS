@@ -28,7 +28,7 @@ Double click on button "ESP32 APP". In the new window, clik on the red button "C
 - From a step response between the input voltage to the speed of the robot, identify a linear model of the system around a voltage u=3V. Justify this operating point
 - Validate this model by comparing the measurements and the simulation of the model
 
-### Control 
+### Control law in real-time
 
 The objective is to propose a speed control of the robot. 
 
