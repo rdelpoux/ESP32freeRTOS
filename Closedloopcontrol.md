@@ -42,6 +42,6 @@ The objective is to propose a speed control of the robot.
 
 - Record the experimental data of the system, plot them on Simulink and discuss compliance with the specifications
 
-- Add a periodic task in parallel to the control law task and analyze the close loop performances according to the duration of the task.
+- Add a periodic task in parallel to the control law task and analyze the close loop performances.
 
 
