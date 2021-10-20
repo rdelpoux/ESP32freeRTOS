@@ -64,6 +64,7 @@ Code example :
 #define GPIO_PWM0B_OUT XX   //Set GPIO XX as PWM0B
 
 void setup() {
+  Serial.begin(115200);
   Serial.println("initializing mcpwm control gpio...n");
   mcpwm_gpio_init(MOTOR_CTRL_MCPWM_UNIT, MCPWM0A, GPIO_PWM0A_OUT);
   mcpwm_gpio_init(MOTOR_CTRL_MCPWM_UNIT, MCPWM0B, GPIO_PWM0B_OUT);
@@ -196,7 +197,7 @@ On software side, the objective is to detect raising and falling edge. Without k
 
 ```c
 pinMode(S1A , INPUT_PULLUP);
-attachInterrupt(digitalPinToInterrupt(pin), ISR, mode)
+attachInterrupt(digitalPinToInterrupt(pin), ISR, mode);
 ```
 
 - Parameters
