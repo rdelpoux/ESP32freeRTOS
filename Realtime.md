@@ -140,6 +140,7 @@ for( i = 0; i<iterationsNb; i++ ) {
   else
     state = HIGH;
   digitalWrite(pinToOscillo, state);   
+}
 ```
 
 2. Two competing tasks
